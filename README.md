@@ -1,4 +1,17 @@
-# Sistema de Gerenciamento de Biblioteca
-Projeto de Gerenciamento de Biblioteca WEB API desenvolvido em C# e SQLite para a matéria de desenvolvimento de software visual.
-Curso: Engenharia de Software - Universidade Positivo.
-Período: 3º
+# Librabry management system
+Repository created to save the project develped to visual software development to Software Engineering degree.
+
+## Author
+
+- [@isabelaclass](https://github.com/isabelaclass)
+
+
+## Learnings
+
+- WEB API
+- Mvc
+- SQLite
+  
+## Tech
+
+**Back-end:** C#, SQLite
