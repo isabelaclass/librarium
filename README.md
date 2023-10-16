@@ -1,4 +1,4 @@
-# Librabry management system
+# Library management system
 Repository created to save the project develped to visual software development to Software Engineering degree.
 
 ## Author
