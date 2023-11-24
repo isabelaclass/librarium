@@ -67,12 +67,12 @@ namespace Biblioteca.Migrations
                 name: "Exemplar",
                 columns: table => new
                 {
-                    CodigoDeBarras = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Exemplar", x => x.CodigoDeBarras);
+                    table.PrimaryKey("PK_Exemplar", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,12 +108,12 @@ namespace Biblioteca.Migrations
                 name: "Isbn",
                 columns: table => new
                 {
-                    Isbn = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Isbn", x => x.Isbn);
+                    table.PrimaryKey("PK_Isbn", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,8 +125,7 @@ namespace Biblioteca.Migrations
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     Endereco = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    DataDeNascimento = table.Column<DateOnly>(type: "TEXT", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -140,17 +139,16 @@ namespace Biblioteca.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(type: "TEXT", nullable: true),
-                    AutorId = table.Column<int>(type: "INTEGER", nullable: true),
-                    EditoraId = table.Column<int>(type: "INTEGER", nullable: true),
-                    GeneroId = table.Column<int>(type: "INTEGER", nullable: true),
-                    CategoriaId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Isbn = table.Column<int>(type: "INTEGER", nullable: true),
-                    CatalogoId = table.Column<int>(type: "INTEGER", nullable: true),
-                    ExemplarCodigoDeBarras = table.Column<int>(type: "INTEGER", nullable: true),
-                    funcionarioId = table.Column<int>(type: "INTEGER", nullable: true),
+                    AutorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EditoraId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GeneroId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoriaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsbnId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CatalogoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExemplarId = table.Column<int>(type: "INTEGER", nullable: false),
+                    FuncionarioId = table.Column<int>(type: "INTEGER", nullable: false),
                     Paginas = table.Column<int>(type: "INTEGER", nullable: false),
-                    Publicacao = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    Disponibilidade = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Publicacao = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,42 +157,50 @@ namespace Biblioteca.Migrations
                         name: "FK_Livro_Autor_AutorId",
                         column: x => x.AutorId,
                         principalTable: "Autor",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Livro_Catalogo_CatalogoId",
                         column: x => x.CatalogoId,
                         principalTable: "Catalogo",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Livro_Categoria_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categoria",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Livro_Editora_EditoraId",
                         column: x => x.EditoraId,
                         principalTable: "Editora",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Livro_Exemplar_ExemplarCodigoDeBarras",
-                        column: x => x.ExemplarCodigoDeBarras,
+                        name: "FK_Livro_Exemplar_ExemplarId",
+                        column: x => x.ExemplarId,
                         principalTable: "Exemplar",
-                        principalColumn: "CodigoDeBarras");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Livro_Funcionario_funcionarioId",
-                        column: x => x.funcionarioId,
+                        name: "FK_Livro_Funcionario_FuncionarioId",
+                        column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Livro_Genero_GeneroId",
                         column: x => x.GeneroId,
                         principalTable: "Genero",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Livro_Isbn_Isbn",
-                        column: x => x.Isbn,
+                        name: "FK_Livro_Isbn_IsbnId",
+                        column: x => x.IsbnId,
                         principalTable: "Isbn",
-                        principalColumn: "Isbn");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,10 +209,10 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: true),
-                    LivroId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DataEmprestimo = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    FuncionarioId = table.Column<int>(type: "INTEGER", nullable: true)
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LivroId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DataEmprestimo = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FuncionarioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,17 +221,20 @@ namespace Biblioteca.Migrations
                         name: "FK_Emprestimo_Funcionario_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Emprestimo_Livro_LivroId",
                         column: x => x.LivroId,
                         principalTable: "Livro",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Emprestimo_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,10 +243,10 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: true),
-                    LivroId = table.Column<int>(type: "INTEGER", nullable: true),
-                    DataReserva = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    FuncionarioId = table.Column<int>(type: "INTEGER", nullable: true)
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LivroId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DataReserva = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FuncionarioId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,17 +255,20 @@ namespace Biblioteca.Migrations
                         name: "FK_Reserva_Funcionario_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reserva_Livro_LivroId",
                         column: x => x.LivroId,
                         principalTable: "Livro",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reserva_Usuario_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuario",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -295,14 +307,14 @@ namespace Biblioteca.Migrations
                 column: "EditoraId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Livro_ExemplarCodigoDeBarras",
+                name: "IX_Livro_ExemplarId",
                 table: "Livro",
-                column: "ExemplarCodigoDeBarras");
+                column: "ExemplarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Livro_funcionarioId",
+                name: "IX_Livro_FuncionarioId",
                 table: "Livro",
-                column: "funcionarioId");
+                column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Livro_GeneroId",
@@ -310,9 +322,9 @@ namespace Biblioteca.Migrations
                 column: "GeneroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Livro_Isbn",
+                name: "IX_Livro_IsbnId",
                 table: "Livro",
-                column: "Isbn");
+                column: "IsbnId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reserva_FuncionarioId",

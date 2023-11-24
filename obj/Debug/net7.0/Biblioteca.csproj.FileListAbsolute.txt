@@ -69,3 +69,9 @@ C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimen
 C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\obj\Debug\net7.0\Biblioteca.pdb
 C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\obj\Debug\net7.0\Biblioteca.genruntimeconfig.cache
 C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\obj\Debug\net7.0\ref\Biblioteca.dll
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\angular.json
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\package-lock.json
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\package.json
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\tsconfig.app.json
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\tsconfig.json
+C:\Users\isabe\OneDrive\Documentos\Software engineering\3 PERÍODO\Desenvolvimento de software visual\Biblioteca\Biblioteca\bin\Debug\net7.0\tsconfig.spec.json

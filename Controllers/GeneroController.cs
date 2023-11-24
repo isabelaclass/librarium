@@ -16,7 +16,18 @@ namespace Bibioteca;
             _dbContext = dbContext;
         }
 
-    
+
+        [HttpPost]
+        [Route("cadastrar")]
+        public async Task<ActionResult> Cadastrar(Genero genero)
+        {
+            if (_dbContext is null) return NotFound();
+            if (_dbContext.Genero is null) return NotFound();
+            await _dbContext.AddAsync(genero);
+            await _dbContext.SaveChangesAsync();
+            return Created("",genero);
+        }
+
         [HttpGet]
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Genero>>> Listar()
@@ -35,6 +46,19 @@ namespace Bibioteca;
             var generoTemp = await _dbContext.Genero.FindAsync(id);
             if(generoTemp is null) return NotFound();
             return generoTemp;
+        }
+
+        [HttpDelete]
+        [Route("excluir/{id}")]
+        public async Task<ActionResult> Excluir(int id)
+        {
+            if(_dbContext is null) return NotFound();
+            if(_dbContext.Genero is null) return NotFound();
+            var generoTemp = await _dbContext.Genero.FindAsync(id);
+            if(generoTemp is null) return NotFound();
+            _dbContext.Remove(generoTemp);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
         }
 
         }

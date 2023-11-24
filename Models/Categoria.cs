@@ -5,4 +5,5 @@ using System.ComponentModel.DataAnnotations;
         [Key]
         public int Id { get; set; }
         public string? Descricao { get; set; }
+       
     }

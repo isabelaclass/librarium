@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Migrations
 {
     [DbContext(typeof(BibliotecaDbContext))]
-    [Migration("20231007020132_AlteradoTalCoisa")]
-    partial class AlteradoTalCoisa
+    [Migration("20231124030433_CriacaoInicial")]
+    partial class CriacaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,16 +82,16 @@ namespace Biblioteca.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("DataEmprestimo")
+                    b.Property<DateTime>("DataEmprestimo")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FuncionarioId")
+                    b.Property<int>("FuncionarioId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("LivroId")
+                    b.Property<int>("LivroId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -107,11 +107,11 @@ namespace Biblioteca.Migrations
 
             modelBuilder.Entity("Biblioteca.Exemplar", b =>
                 {
-                    b.Property<int>("CodigoDeBarras")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("CodigoDeBarras");
+                    b.HasKey("Id");
 
                     b.ToTable("Exemplar");
                 });
@@ -155,11 +155,11 @@ namespace Biblioteca.Migrations
 
             modelBuilder.Entity("Biblioteca.ISBN", b =>
                 {
-                    b.Property<int>("Isbn")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Isbn");
+                    b.HasKey("Id");
 
                     b.ToTable("Isbn");
                 });
@@ -170,41 +170,38 @@ namespace Biblioteca.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AutorId")
+                    b.Property<int>("AutorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CatalogoId")
+                    b.Property<int>("CatalogoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CategoriaId")
+                    b.Property<int>("CategoriaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Disponibilidade")
+                    b.Property<int>("EditoraId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("EditoraId")
+                    b.Property<int>("ExemplarId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ExemplarCodigoDeBarras")
+                    b.Property<int>("FuncionarioId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("GeneroId")
+                    b.Property<int>("GeneroId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Isbn")
+                    b.Property<int>("IsbnId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Paginas")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("Publicacao")
+                    b.Property<DateTime>("Publicacao")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("funcionarioId")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -216,13 +213,13 @@ namespace Biblioteca.Migrations
 
                     b.HasIndex("EditoraId");
 
-                    b.HasIndex("ExemplarCodigoDeBarras");
+                    b.HasIndex("ExemplarId");
+
+                    b.HasIndex("FuncionarioId");
 
                     b.HasIndex("GeneroId");
 
-                    b.HasIndex("Isbn");
-
-                    b.HasIndex("funcionarioId");
+                    b.HasIndex("IsbnId");
 
                     b.ToTable("Livro");
                 });
@@ -233,16 +230,16 @@ namespace Biblioteca.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("DataReserva")
+                    b.Property<DateTime>("DataReserva")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FuncionarioId")
+                    b.Property<int>("FuncionarioId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("LivroId")
+                    b.Property<int>("LivroId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UsuarioId")
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -261,9 +258,6 @@ namespace Biblioteca.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("DataDeNascimento")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
@@ -286,15 +280,21 @@ namespace Biblioteca.Migrations
                 {
                     b.HasOne("Biblioteca.Funcionario", "Funcionario")
                         .WithMany()
-                        .HasForeignKey("FuncionarioId");
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Livro", "Livro")
                         .WithMany()
-                        .HasForeignKey("LivroId");
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Funcionario");
 
@@ -307,35 +307,51 @@ namespace Biblioteca.Migrations
                 {
                     b.HasOne("Biblioteca.Autor", "Autor")
                         .WithMany()
-                        .HasForeignKey("AutorId");
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Catalogo", "Catalogo")
                         .WithMany()
-                        .HasForeignKey("CatalogoId");
+                        .HasForeignKey("CatalogoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaId");
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Editora", "Editora")
                         .WithMany()
-                        .HasForeignKey("EditoraId");
+                        .HasForeignKey("EditoraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Exemplar", "Exemplar")
                         .WithMany()
-                        .HasForeignKey("ExemplarCodigoDeBarras");
+                        .HasForeignKey("ExemplarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Biblioteca.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Genero", "Genero")
                         .WithMany()
-                        .HasForeignKey("GeneroId");
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Biblioteca.ISBN", "ISBN")
+                    b.HasOne("Biblioteca.ISBN", "Isbn")
                         .WithMany()
-                        .HasForeignKey("Isbn");
-
-                    b.HasOne("Biblioteca.Funcionario", "funcionario")
-                        .WithMany()
-                        .HasForeignKey("funcionarioId");
+                        .HasForeignKey("IsbnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Autor");
 
@@ -347,26 +363,32 @@ namespace Biblioteca.Migrations
 
                     b.Navigation("Exemplar");
 
+                    b.Navigation("Funcionario");
+
                     b.Navigation("Genero");
 
-                    b.Navigation("ISBN");
-
-                    b.Navigation("funcionario");
+                    b.Navigation("Isbn");
                 });
 
             modelBuilder.Entity("Biblioteca.Reserva", b =>
                 {
                     b.HasOne("Biblioteca.Funcionario", "Funcionario")
                         .WithMany()
-                        .HasForeignKey("FuncionarioId");
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Livro", "Livro")
                         .WithMany()
-                        .HasForeignKey("LivroId");
+                        .HasForeignKey("LivroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Biblioteca.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Funcionario");
 

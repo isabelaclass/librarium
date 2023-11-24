@@ -22,7 +22,6 @@ namespace Bibioteca;
         {
             if (_dbContext is null) return NotFound();
             if (_dbContext.Emprestimo is null) return NotFound();
-            if (emprestimo.Livro.Disponibilidade == false) return NotFound();
             await _dbContext.AddAsync(emprestimo);
             await _dbContext.SaveChangesAsync();
             return Created("",emprestimo);

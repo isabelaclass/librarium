@@ -3,5 +3,6 @@ using System.ComponentModel.DataAnnotations;
 public class ISBN
 {
     [Key]
-    public int Isbn { get; set; }
+    public int Id { get; set; }
+
 }

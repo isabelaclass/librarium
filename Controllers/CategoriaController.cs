@@ -16,7 +16,18 @@ namespace Bibioteca;
             _dbContext = dbContext;
         }
 
-    
+
+        [HttpPost]
+        [Route("cadastrar")]
+        public async Task<ActionResult> Cadastrar(Categoria categoria)
+        {
+            if (_dbContext is null) return NotFound();
+            if (_dbContext.Categoria is null) return NotFound();
+            await _dbContext.AddAsync(categoria);
+            await _dbContext.SaveChangesAsync();
+            return Created("",categoria);
+        }
+
         [HttpGet]
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Categoria>>> Listar()
@@ -35,6 +46,19 @@ namespace Bibioteca;
             var categoriaTemp = await _dbContext.Categoria.FindAsync(id);
             if(categoriaTemp is null) return NotFound();
             return categoriaTemp;
+        }
+
+        [HttpDelete]
+        [Route("excluir/{id}")]
+        public async Task<ActionResult> Excluir(int id)
+        {
+            if(_dbContext is null) return NotFound();
+            if(_dbContext.Categoria is null) return NotFound();
+            var categoriaTemp = await _dbContext.Categoria.FindAsync(id);
+            if(categoriaTemp is null) return NotFound();
+            _dbContext.Remove(categoriaTemp);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
         }
 
         }

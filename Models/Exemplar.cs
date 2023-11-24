@@ -3,5 +3,6 @@ using System.ComponentModel.DataAnnotations;
 public class Exemplar
 {
     [Key]
-    public int CodigoDeBarras { get; set; }
+    public int Id { get; set; }
+
 }

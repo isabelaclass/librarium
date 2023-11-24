@@ -16,7 +16,18 @@ namespace Bibioteca;
             _dbContext = dbContext;
         }
 
-    
+
+        [HttpPost]
+        [Route("cadastrar")]
+        public async Task<ActionResult> Cadastrar(Editora editora)
+        {
+            if (_dbContext is null) return NotFound();
+            if (_dbContext.Editora is null) return NotFound();
+            await _dbContext.AddAsync(editora);
+            await _dbContext.SaveChangesAsync();
+            return Created("",editora);
+        }
+
         [HttpGet]
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Editora>>> Listar()
@@ -35,6 +46,19 @@ namespace Bibioteca;
             var editoraTemp = await _dbContext.Editora.FindAsync(id);
             if(editoraTemp is null) return NotFound();
             return editoraTemp;
+        }
+
+        [HttpDelete]
+        [Route("excluir/{id}")]
+        public async Task<ActionResult> Excluir(int id)
+        {
+            if(_dbContext is null) return NotFound();
+            if(_dbContext.Editora is null) return NotFound();
+            var editoraTemp = await _dbContext.Editora.FindAsync(id);
+            if(editoraTemp is null) return NotFound();
+            _dbContext.Remove(editoraTemp);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
         }
 
         }

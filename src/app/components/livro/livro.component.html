@@ -1,0 +1,104 @@
+<div class="container p-5">
+    <div class="row">
+      <div
+        class="col-6 border border-light rounded p-5 shadow" *ngIf="formulario">
+        <h6>{{ tituloFormulario }}</h6>
+        <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()">
+          <div class="form-group">
+            <label>Id</label>
+            <input type="number" class="form-control form-control-sm" formControlName="id"/>
+          </div>
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" class="form-control form-control-sm" formControlName="titulo"/>
+          </div>
+            <div class="form-group">
+              <label>Autor</label>
+              <select class="form-control form-control-sm" formControlName="autorId">
+                <option *ngFor="let autor of autores" [value]="autor.id">
+                  {{ autor.nome }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Editora</label>
+              <select class="form-control form-control-sm" formControlName="editoraId">
+                <option *ngFor="let editora of editoras" [value]="editora.id">
+                  {{ editora.nome }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Gênero</label>
+              <select class="form-control form-control-sm" formControlName="generoId">
+                <option *ngFor="let genero of generos" [value]="genero.id">
+                  {{ genero.nome }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Categoria</label>
+              <select class="form-control form-control-sm" formControlName="categoriaId">
+                <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                  {{ categoria.descricao }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>ISBN</label>
+              <select class="form-control form-control-sm" formControlName="isbnId">
+                <option *ngFor="let isbn of isbns" [value]="isbn.id">
+                  {{ isbn.id }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Catálogo</label>
+              <select class="form-control form-control-sm" formControlName="catalogoId">
+                <option *ngFor="let catalogo of catalogos" [value]="catalogo.id">
+                  {{ catalogo.descricao }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Exemplar</label>
+              <select class="form-control form-control-sm" formControlName="exemplarId">
+                <option *ngFor="let exemplar of exemplares" [value]="exemplar.id">
+                  {{ exemplar.id}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Funcionário</label>
+              <select class="form-control form-control-sm" formControlName="funcionarioId">
+                <option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">
+                  {{ funcionario.nome}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Páginas</label>
+              <input type="number" class="form-control form-control-sm" formControlName="paginas"/>
+            </div>
+            <div class="form-group">
+              <label>Publicação</label>
+              <input type="datetime-local" class="form-control form-control-sm" formControlName="publicacao"/>
+            </div>
+          <div class="container">
+            <div class="row">
+              <div>
+                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                  Salvar
+                </button>
+              </div>
+              <div class="pl-1">
+                <button type="button" class="btn btn-sm btn-light">Voltar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  

@@ -1,0 +1,27 @@
+button {
+    color: black;
+    font-size: 18px;
+    font-family: Roboto;
+    text-align: left;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  h6 {
+    color: black;
+    font-size: 25px;
+    font-family: Roboto;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  label {
+    margin-left: 10;
+    margin-right: 10;
+  }
+
+  text {
+    font-size: 10;
+  }
+
+ 
