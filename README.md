@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Biblioteca
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
@@ -25,3 +26,22 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# Library management system
+Repository created to save the project develped to visual software development to Software Engineering degree.
+
+## Author
+
+- [@isabelaclass](https://github.com/isabelaclass)
+
+
+## Learnings
+
+- WEB API
+- Mvc
+- SQLite
+  
+## Tech
+
+**Back-end:** C#, SQLite
+>>>>>>> e808eb29d9eebf276abddd214d4307e1d476f731
